@@ -10,7 +10,7 @@ const getDeals=async(req,res)=>{
         if(leadId) query.lead=leadId
 
         const deals=await Deal.find(query)
-        .populate('Lead', 'name email company')
+        .populate('lead', 'name email company')
         .populate('assignedTo', 'name')
         .sort({createdAt:-1})
 

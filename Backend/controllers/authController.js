@@ -4,13 +4,13 @@ const User=require('../models/userSchema')
 
 const generateToken=(id)=>jwt.sign(
     {id}, 
-    process.env.JWT_SECRET, 
+    process.env.JWT_SECRET_KEY, 
     {expiresIn: '7d'}
 )
 
 const register=async(req,res)=>{
     try{
-        const{name, email, password}=req.body
+        const{name, email, password, role}=req.body
         if(!name || !email || !password){
             return res.status(400).json({success:false, message:"All fields are mandetory"})
         }
@@ -25,13 +25,14 @@ const register=async(req,res)=>{
                 name,
                 email,
                 password:hashedPassword,
-                role:role || 'sales'
+                role:role
             }
         )
 
         res.status(201).json(
             {
                 success:true, 
+                message:"Registered successfully",
                 token:generateToken(user._id), 
                 user:{
                     id:user._id,
@@ -68,6 +69,7 @@ const login=async(req,res)=>{
 
         res.json({
             success:true,
+            message:"Loggedin successfully",
             token:generateToken(user._id),
             user:{
                 id:user._id,
@@ -78,8 +80,14 @@ const login=async(req,res)=>{
         })
     }
     catch(err){
-        res.status(500).json({success:true, message:err.message})
+        res.status(500).json({success:false, message:err.message})
     }
 }
 
-module.exports={register, login}
+
+const getMe=async(req,res)=>{
+    res.json({success:true, user:req.user})
+}
+
+
+module.exports={register, login, getMe}

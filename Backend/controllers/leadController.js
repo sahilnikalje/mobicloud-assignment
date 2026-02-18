@@ -20,7 +20,7 @@ const getLeads=async(req,res)=>{
         const leads=await Lead.find(query)
         .populate('assignedTo', 'name email')
         .sort({createdAt:-1})
-        .skip((page-1))*limit
+        .skip((page-1)*limit)
         .limit(Number(limit))
 
         res.json({success:true, data:leads, total, page:Number(page), pages:Math.ceil(total/limit)})

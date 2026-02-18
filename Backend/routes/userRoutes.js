@@ -2,6 +2,7 @@ const express=require('express')
 const{getAllUsers, getUserWithLeads, updateUser, deleteUser}=require('../controllers/userController')
 const {protect, adminOnly}=require('../middlewares/authMiddleware')
 
+const router=express.Router()
 
 router.use(protect, adminOnly)
 router.get('/', getAllUsers)
