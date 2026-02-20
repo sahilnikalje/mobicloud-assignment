@@ -37,6 +37,10 @@ app.use((err,req,res,next)=>{
 
 const PORT=process.env.PORT
 
+app.get('/', (req, res) => {
+  res.json({ success: true, message: "Backend is running" })
+})
+
 const startServer=async()=>{
     try{
         await connectDB()
