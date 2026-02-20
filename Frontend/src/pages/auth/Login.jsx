@@ -38,7 +38,7 @@ export default function Login() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input label="Email" type="email" placeholder="Enter email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} required />
           <Input label="Password" type="password" placeholder="Enter password" value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} required />
-          <Button type="submit" loading={loading} className="w-full justify-center mt-2">Sig passwordn In</Button>
+          <Button type="submit" loading={loading} className="w-full justify-center mt-2">Sign In</Button>
         </form>
 
         <p className="text-center text-sm text-gray-500 mt-6">
