@@ -13,11 +13,11 @@ const activityRoutes=require('./routes/activityRoutes')
 
 const app=express()
 
-const PORT=process.env.PORT
+
 
 app.use(express.json())
 app.use(morgan('dev'))
-app.use(cors({origin:process.env.VITE_URIi, credentials:true}))
+app.use(cors({origin:process.env.VITE_URI, credentials:true}))
 
 const limiter=rateLimit({windowMs:15*60*1000, max:100})
 
@@ -35,6 +35,7 @@ app.use((err,req,res,next)=>{
     res.status(status).json({success:false, message:err.message})
 })
 
+const PORT=process.env.PORT
 
 const startServer=async()=>{
     try{
